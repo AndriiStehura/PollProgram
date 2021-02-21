@@ -1,0 +1,35 @@
+﻿<Page x:Class="PollProgram.Views.Pages.OptionsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PollProgram.Views.Pages"
+      xmlns:vm="clr-namespace:PollProgram.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1200"
+      Title="OptionsPage">
+    <Page.DataContext>
+        <vm:OptionsPageViewModel/>
+    </Page.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Style="{StaticResource Header}" Grid.Row="0">
+            Опції
+        </TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1">
+                <Button Content="Почати опитанування" Style="{StaticResource StackButton}"/>
+                <Button Content="Подивитись статистику" Style="{StaticResource StackButton}"/>
+                <Button Content="{Binding Name}" Style="{StaticResource StackButton}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

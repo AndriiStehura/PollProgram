@@ -1,0 +1,38 @@
+﻿<Page x:Class="PollProgram.Views.Pages.StartPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PollProgram.Views.Pages"
+      xmlns:vm="clr-namespace:PollProgram.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="1280"
+      Title="StartPage">
+
+    <Page.DataContext>
+        <vm:StartPageViewModel/>
+    </Page.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3.25*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3.25*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Style="{StaticResource Heading}" Grid.Row="1" Grid.Column="1" 
+                   VerticalAlignment="Center" HorizontalAlignment="Center">
+            Введіть своє ім’я:
+        </TextBlock>
+        <TextBox Style="{StaticResource BaseTextBox}" Grid.Row="2" Grid.Column="1" 
+                 VerticalAlignment="Center" 
+                 Text="{Binding Person.Name, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Далі" Style="{StaticResource BaseButton}" Grid.Row="3" 
+                Grid.Column="1" Command="{Binding ContinueCommand}"/>
+    </Grid>
+</Page>

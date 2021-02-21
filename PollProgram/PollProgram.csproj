@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Questions\advanced.json" />
+    <None Remove="Resources\Questions\competent.json" />
+    <None Remove="Resources\Questions\expert.json" />
+    <None Remove="Resources\Questions\novice.json" />
+    <None Remove="Resources\Questions\proficient.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Questions\expert.json" />
+    <Resource Include="Resources\Questions\proficient.json" />
+    <Resource Include="Resources\Questions\competent.json" />
+    <Resource Include="Resources\Questions\advanced.json" />
+    <Resource Include="Resources\Questions\novice.json" />
+  </ItemGroup>
+
+</Project>
