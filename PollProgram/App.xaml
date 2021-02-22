@@ -28,5 +28,25 @@
         <Style TargetType="TextBlock" x:Key="BaseTextBlock">
             <Setter Property="FontSize" Value="24"/>
         </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource StackButton}" 
+               x:Key="StackButtonTextWrap">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource BaseButton}" x:Key="ButtonDanger">
+            <Setter Property="Foreground" Value="Red"/>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource BaseButton}" x:Key="ButtonSuccess">
+            <Setter Property="Foreground" Value="Green"/>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource StackButtonTextWrap}" 
+               x:Key="StackTextWrapDangerButton">
+            <Setter Property="Foreground" Value="Red"/>
+        </Style>
     </Application.Resources>
 </Application>

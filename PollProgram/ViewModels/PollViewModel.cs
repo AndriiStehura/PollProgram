@@ -4,10 +4,11 @@ using System.Collections;
 using System.Text;
 using PollProgram.Components;
 using Newtonsoft.Json;
+using System.Windows.Input;
 
 namespace PollProgram.ViewModels
 {
-    class PollViewModel: BaseViewModel
+    class PollViewModel : BaseViewModel
     {
         private List<QuestionBlockViewModel> _pollBlocks;
         private UnitOfWork _unit;
@@ -16,10 +17,10 @@ namespace PollProgram.ViewModels
         {
             _unit = new UnitOfWork();
             _pollBlocks = new List<QuestionBlockViewModel>();
-            
+
             string[] levels = new string[]
             {
-                "novice", "advanced", "competent", "proficient", "expert"  
+                "novice", "advanced", "competent", "proficient", "expert"
             };
             foreach (string level in levels)
             {
@@ -28,7 +29,7 @@ namespace PollProgram.ViewModels
             }
         }
 
-        public List<QuestionBlockViewModel> PollBlocks 
+        public List<QuestionBlockViewModel> PollBlocks
         {
             get => _pollBlocks;
             set
@@ -37,5 +38,19 @@ namespace PollProgram.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public ICommand ClearAllCommand => new RelayCommand(obj =>
+        {
+            foreach (var block in _pollBlocks)
+                foreach (var question in block.Questions)
+                    foreach (var answer in question.Answers)
+                        answer.IsChecked = false;
+        });
+
+        public ICommand BackCommand => new RelayCommand(obj =>
+        {
+            MainWindow mw = (MainWindow)App.Current.MainWindow;
+            mw.MainFrame.GoBack();
+        });
     }
 }

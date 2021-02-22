@@ -33,5 +33,19 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        <DockPanel Grid.Column="1" Margin="10" LastChildFill="False">
+            <Button Style="{StaticResource StackTextWrapDangerButton}" Command="{Binding ClearAllCommand}"
+                    DockPanel.Dock="Top">
+                Очистити все
+            </Button>
+            <Button Style="{StaticResource StackButtonTextWrap}" Command="{Binding BackCommand}"
+                    DockPanel.Dock="Top">
+                Повернутись до опцій
+            </Button>
+            <Button Style="{StaticResource ButtonSuccess}" Command="{Binding FinishCommand}"
+                    DockPanel.Dock="Bottom">
+                Завершити
+            </Button>
+        </DockPanel>
     </Grid>
 </Page>
