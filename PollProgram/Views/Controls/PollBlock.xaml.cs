@@ -1,15 +1,10 @@
-﻿using System;
+﻿using PollProgram.Components;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Linq;
+using System;
 
 namespace PollProgram.Views.Controls
 {
@@ -18,26 +13,47 @@ namespace PollProgram.Views.Controls
     /// </summary>
     public partial class PollBlock : UserControl
     {
-        private readonly DependencyProperty _headerText;
-        private readonly DependencyProperty _questions;
+        public static readonly DependencyProperty HeaderTextProperty;
+        public static readonly DependencyProperty QuestionsProperty;
+
+        static PollBlock()
+        {
+            HeaderTextProperty = DependencyProperty.Register(
+                nameof(HeaderText),
+                typeof(string),
+                typeof(PollBlock));
+
+            QuestionsProperty = DependencyProperty.Register(
+                nameof(Questions),
+                typeof(object),
+                typeof(PollBlock));
+        }
 
         public PollBlock()
         {
             InitializeComponent();
-            DependencyProperty.Register(nameof(HeaderText), HeaderText.GetType(), GetType());
-            DependencyProperty.Register(nameof(Questions), Questions.GetType(), GetType());
         }
 
-        public string HeaderText 
+        public string HeaderText
         {
-            get => (string)GetValue(_headerText);
-            set => SetValue(_headerText, value);
+            get => (string)GetValue(HeaderTextProperty);
+            set => SetValue(HeaderTextProperty, value);
         }
 
-        public IObservable<object> Questions 
+        public IEnumerable<object> Questions
         {
-            get => (IObservable<object>)GetValue(_questions);
-            set => SetValue(_questions, value);
+            get => (IEnumerable<object>)GetValue(QuestionsProperty);
+            set => SetValue(QuestionsProperty, value);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var answersCollection = Questions.SelectMany(x => (IEnumerable<object>)x
+                .GetType()
+                .GetProperty("Answers")
+                .GetValue(x));
+            foreach (var answer in answersCollection)
+                answer.GetType().GetProperty("IsChecked").SetValue(answer, false);
         }
     }
 }

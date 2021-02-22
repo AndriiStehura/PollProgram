@@ -1,4 +1,5 @@
-﻿using PollProgram.Models;
+﻿using PollProgram.Components.Repositories;
+using PollProgram.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +8,13 @@ namespace PollProgram.Components
 {
     public class UnitOfWork
     {
-        public Person Person { get; set; } 
+        private PollQuestionsRepository _pollQuestionsRepository;
+
+        public UnitOfWork()
+        {
+            _pollQuestionsRepository = new PollQuestionsRepository();
+        }
+
+        public PollQuestionsRepository PollQuestions => _pollQuestionsRepository;
     }
 }

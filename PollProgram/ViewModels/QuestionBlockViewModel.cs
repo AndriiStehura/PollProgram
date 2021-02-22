@@ -4,9 +4,9 @@ using System.Text;
 
 namespace PollProgram.ViewModels
 {
-    class QuestionBlockViewModel: BaseViewModel
+    public class QuestionBlockViewModel: BaseViewModel
     {
         public string Name { get; set; }
-        public IObservable<QuestionViewModel> Questions { get; set; }
+        public IEnumerable<QuestionViewModel> Questions { get; set; }
     }
 }

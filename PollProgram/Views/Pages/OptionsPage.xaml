@@ -26,9 +26,9 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="1">
-                <Button Content="Почати опитанування" Style="{StaticResource StackButton}"/>
+                <Button Content="Почати опитанування" Style="{StaticResource StackButton}"
+                        Command="{Binding PollCommand}"/>
                 <Button Content="Подивитись статистику" Style="{StaticResource StackButton}"/>
-                <Button Content="{Binding Name}" Style="{StaticResource StackButton}"/>
             </StackPanel>
         </Grid>
     </Grid>

@@ -21,5 +21,12 @@
             <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="TextAlignment" Value="Center"/>
         </Style>
+        <Style TargetType="RadioButton" x:Key="Answer">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="BaseTextBlock">
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
     </Application.Resources>
 </Application>

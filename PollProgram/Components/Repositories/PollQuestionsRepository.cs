@@ -1,10 +1,21 @@
-﻿using System;
+﻿using PollProgram.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace PollProgram.Components.Repositories
 {
-    class PollQuestionsRepository
+    public class PollQuestionsRepository
     {
+        public QuestionBlockViewModel GetBlock()
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            string text = File.ReadAllText(FilePath, Encoding.GetEncoding("windows-1251"));
+            return JsonConvert.DeserializeObject<QuestionBlockViewModel>(text);
+        }
+
+        public string FilePath { get; set; }
     }
 }

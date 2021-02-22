@@ -7,50 +7,55 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Name="root">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="9*" />
-        </Grid.RowDefinitions>
-        <TextBlock Text="{Binding ElementName=root, Path=HeaderText}" 
+    <Border BorderBrush="Red" BorderThickness="1" Margin="0 5">
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="9*" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Binding ElementName=root, Path=HeaderText}" 
                    Style="{StaticResource Heading}"
                    HorizontalAlignment="Center"
                    Grid.ColumnSpan="2"
                    Grid.Row="0" d:Text="Block Header"/>
-        <Button Content="Очистити" Grid.Column="1" Grid.Row="0" 
-                Style="{StaticResource BaseButton}"/>
-        <ItemsControl ItemsSource="{Binding ElementName=root, Path=Questions}"
+            <Button Content="Очистити" Grid.Column="1" Grid.Row="0" 
+                Style="{StaticResource BaseButton}" Click="Button_Click"/>
+            <ItemsControl ItemsSource="{Binding ElementName=root, Path=Questions}"
                       Grid.Row="1"
                       Grid.Column="0">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Question}"/>
-                        <ItemsControl ItemsSource="{Binding Answers}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <RadioButton Content="{Binding Text}" 
-                                                 IsChecked="{Binding IsChecked}"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Question}" Name="GroupName"
+                                       Style="{StaticResource BaseTextBlock}"/>
+                            <ItemsControl ItemsSource="{Binding Answers}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <RadioButton Style="{StaticResource Answer}"
+                                                 Content="{Binding Text}" 
+                                                 IsChecked="{Binding IsChecked}"
+                                                 GroupName="{Binding ElementName=GroupName, Path=Text}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Border>
 </UserControl>

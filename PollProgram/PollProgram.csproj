@@ -7,23 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Questions\advanced.json" />
-    <None Remove="Resources\Questions\competent.json" />
-    <None Remove="Resources\Questions\expert.json" />
-    <None Remove="Resources\Questions\novice.json" />
-    <None Remove="Resources\Questions\proficient.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Text.Encoding" Version="4.3.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+    <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Questions\expert.json" />
-    <Resource Include="Resources\Questions\proficient.json" />
-    <Resource Include="Resources\Questions\competent.json" />
-    <Resource Include="Resources\Questions\advanced.json" />
-    <Resource Include="Resources\Questions\novice.json" />
+    <None Update="Resources\Questions\advanced.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Questions\competent.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Questions\expert.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Questions\novice.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Questions\proficient.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
-
 </Project>
