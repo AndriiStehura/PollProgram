@@ -5,6 +5,9 @@ using System.Text;
 using PollProgram.Components;
 using Newtonsoft.Json;
 using System.Windows.Input;
+using System.Linq;
+using System.Windows;
+using PollProgram.Models;
 
 namespace PollProgram.ViewModels
 {
@@ -12,6 +15,7 @@ namespace PollProgram.ViewModels
     {
         private List<QuestionBlockViewModel> _pollBlocks;
         private UnitOfWork _unit;
+        private Person _person;
 
         public PollViewModel()
         {
@@ -27,6 +31,8 @@ namespace PollProgram.ViewModels
                 _unit.PollQuestions.FilePath = $"{Environment.CurrentDirectory}/Resources/Questions/{level}.json";
                 _pollBlocks.Add(_unit.PollQuestions.GetBlock());
             }
+
+            _person = (Person)App.Current.Resources["person"];
         }
 
         public List<QuestionBlockViewModel> PollBlocks
@@ -51,6 +57,36 @@ namespace PollProgram.ViewModels
         {
             MainWindow mw = (MainWindow)App.Current.MainWindow;
             mw.MainFrame.GoBack();
+        });
+
+        public ICommand CompleteCommand => new RelayCommand(obj =>
+        {
+            foreach(var block in _pollBlocks)
+                foreach(var question in block.Questions)
+                {
+                    if (!question.Answers.Any(x => x.IsChecked))
+                    {
+                        MessageBox.Show("Ви відповіли не на всі запитання. Поверніться та дайте відповдь на питання, що залишились.",
+                            "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
+
+            //save into json
+            _unit.ResultsRepository.FilePath = _person.Name + ".json";
+            var results = _pollBlocks.Select(x => new
+            {
+                Name = x.Name,
+                Answers = x.Questions
+                    .SelectMany(y => y.Answers)
+                    .Where(y => y.IsChecked)
+                    .Select(y => y.Score)
+                    .ToArray()
+            });
+            _unit.ResultsRepository.SaveAsJson(results);
+
+            MainWindow mw = (MainWindow)App.Current.MainWindow;
+            mw.MainFrame.Navigate(new Views.Pages.ResultPage());
         });
     }
 }

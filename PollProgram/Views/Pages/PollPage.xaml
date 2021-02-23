@@ -42,7 +42,7 @@
                     DockPanel.Dock="Top">
                 Повернутись до опцій
             </Button>
-            <Button Style="{StaticResource ButtonSuccess}" Command="{Binding FinishCommand}"
+            <Button Style="{StaticResource ButtonSuccess}" Command="{Binding CompleteCommand}"
                     DockPanel.Dock="Bottom">
                 Завершити
             </Button>

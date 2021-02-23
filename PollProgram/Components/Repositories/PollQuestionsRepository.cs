@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace PollProgram.Components.Repositories
 {
-    public class PollQuestionsRepository
+    public class PollQuestionsRepository: IFileWorkingRepository
     {
         public QuestionBlockViewModel GetBlock()
         {
